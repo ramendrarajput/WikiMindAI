@@ -3,6 +3,13 @@ import torch
 import wikipedia as wk
 import transformers as tf
 import streamlit as st
+from transformers import pipeline, Pipeline
+
+
+def load_qa_pipeline() -> Pipeline:
+    qa_pipeline = pipeline("Question-Answering", model="distilbert-base-uncased-distilled-squad")
+    return qa_pipeline
+
 
 def load_wiki(query: str) -> str:
     results = wk.search(query)
@@ -30,3 +37,7 @@ if __name__ == '__main__':
         
         # Displays article summary in paragraph
         article_paragraph.markdown(summary)
+        
+        # -- Questions--
+        if question is "":
+            
