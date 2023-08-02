@@ -9,3 +9,9 @@ if __name__ == '__main__':
     # Display name and titile
     st.title("WikiMindAI - Wikipedia-based Mindful Artificial Intelligence")
     st.write("Search topics, Ask questions, Get answers!")
+    
+    # Topic Input
+    topic = st.text_input("Search Topic", "")
+    
+    # Question Input
+    question = st.text_input("Question", "")
