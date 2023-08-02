@@ -3,21 +3,50 @@ import streamlit as st
 from transformers import pipeline
 
 def load_qa_pipeline():
+    """
+    Loads the Question-Answering pipeline using the DistilBERT model.
+
+    Returns:
+        Pipeline: The Question-Answering pipeline.
+    """
     qa_pipeline = pipeline("question-answering", model="distilbert-base-uncased-distilled-squad")
     return qa_pipeline
 
+
 def load_wiki(query):
+    """
+    Searches Wikipedia for the given query and return a summary of the first search result.
+
+    Args:
+        query (str): The search query for Wikipedia.
+
+    Returns:
+        str: The summary of the first Wikipedia search result.
+    """
     results = wk.search(query)
     summary = wk.summary(results[0], sentences=10)
     return summary
 
+
 def answer_questions(pipeline, question, paragraph):
+    """
+    Uses the Question-Answering pipeline to answer a question based on the given context (paragraph).
+
+    Args:
+        pipeline (Pipeline): The Question-Answering pipeline.
+        question (str): The question to be answered.
+        paragraph (str): The context (paragraph) from which the question should be answered.
+
+    Returns:
+        dict: A dictionary containing the answer to the question and additional details.
+    """
     input_data = {
         "question": question,
         "context": paragraph
     }
     output = pipeline(input_data)
     return output
+
 
 # Main application engine
 if __name__ == '__main__':
