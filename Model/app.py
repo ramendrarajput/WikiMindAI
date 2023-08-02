@@ -16,8 +16,8 @@ def answer_questions(pipeline, question, paragraph):
         "question": question,
         "context": paragraph
     }
-    result = pipeline(input_data)
-    return result
+    output = pipeline(input_data)
+    return output
 
 # Main application engine
 if __name__ == '__main__':
