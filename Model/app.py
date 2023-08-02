@@ -27,3 +27,6 @@ if __name__ == '__main__':
     if topic:
         # Loads Wikipedia summary of topic
         summary = load_wiki(topic)
+        
+        # Displays article summary in paragraph
+        article_paragraph.markdown(summary)
