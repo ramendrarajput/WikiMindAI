@@ -20,6 +20,10 @@ if __name__ == '__main__':
     topic = st.text_input("Search Topic", "")
     
     # Article Paragraph
-    
+    article_paragraph = st.empty()
     # Question Input
     question = st.text_input("Question", "")
+    
+    if topic:
+        # Loads Wikipedia summary of topic
+        summary = load_wiki(topic)
