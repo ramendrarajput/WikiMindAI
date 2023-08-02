@@ -19,3 +19,7 @@ if __name__ == '__main__':
     # Topic Input
     topic = st.text_input("Search Topic", "")
     
+    # Article Paragraph
+    
+    # Question Input
+    question = st.text_input("Question", "")
