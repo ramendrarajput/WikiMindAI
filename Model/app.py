@@ -15,7 +15,6 @@ def load_wiki(query: str) -> str:
     results = wk.search(query)
     summary = wk.summary(results[0], sentences = 10)
     return summary
-    
 
 # Main application engine
 if __name__ == '__main__':
@@ -40,4 +39,5 @@ if __name__ == '__main__':
         
         # -- Questions--
         if question is "":
-            
+            # Loads the question answering pipeline
+            qa_pipeline = load_qa_pipeline()
