@@ -23,7 +23,7 @@ def answer_questions(pipeline, question, paragraph):
 if __name__ == '__main__':
     # Display name and title
     st.title("WikiMindAI - Wikipedia-based Mindful Artificial Intelligence")
-    st.write("Search topics, Ask questions, Get answers!")
+    st.write("Explore Topics, Ask Questions, and Receive Informative Answers!")
 
     # Topic Input
     topic = st.text_input("Search Topic", "")
@@ -52,3 +52,4 @@ if __name__ == '__main__':
 
             # Displaying answer
             st.write(answer)
+st.markdown("Created by Gideon Ogunbanjo")
