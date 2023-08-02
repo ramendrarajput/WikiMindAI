@@ -87,4 +87,5 @@ if __name__ == '__main__':
 
             # Displaying answer
             st.write(answer)
-st.markdown("Created by Gideon Ogunbanjo")
+link='Created by [Gideon Ogunbanjo](https://gideonogunbanjo.netlify.app)'
+st.markdown(link,unsafe_allow_html=True)
