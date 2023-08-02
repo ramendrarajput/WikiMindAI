@@ -2,6 +2,12 @@ import wikipedia as wk
 import streamlit as st
 from transformers import pipeline
 
+
+# Page configuration
+st.set_page_config(
+    page_title="WikiMindAI"
+)
+    
 def load_qa_pipeline():
     """
     Loads the Question-Answering pipeline using the DistilBERT model.
