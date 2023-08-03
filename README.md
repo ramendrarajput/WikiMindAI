@@ -24,4 +24,4 @@ With WikiMindAI, users can explore a wide range of subjects, ask questions about
 
 ### Creator
 Gideon Ogunbanjo
-> Credits: [Wikipedia Bot](https://www.youtube.com/watch?v=wVF0-ZalYmk)
+> [Credits](https://www.youtube.com/@eniolaa)
