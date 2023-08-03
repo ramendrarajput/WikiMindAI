@@ -32,10 +32,13 @@ def load_wiki(query, language="en"):
     Returns:
         str: The summary of the first Wikipedia search result.
     """
-    wiki_wiki = wikipediaapi.Wikipedia(language)
+    headers = {
+        'User-Agent': 'WikiMindAI/1.0 (https://gideonogunbanjo.netlify.app)'
+    }
+    wiki_wiki = wikipediaapi.Wikipedia(language, headers=headers)
     try:
         page = wiki_wiki.page(query)
-        summary = page.summary[:500]  # Limit summary to 500 characters
+        summary = page.summary[:1000]  # Limit summary to 1000 characters
         return summary
     # Disambiguation Error Exception
     except wikipediaapi.exceptions.DisambiguationError:
