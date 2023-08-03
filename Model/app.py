@@ -41,6 +41,8 @@ def load_wiki(query):
         return "Multiple articles found. Please provide a more specific topic."
     except wk.exceptions.HTTPTimeoutError:
         return "No internet connection. Please check your internet settings"
+    except Exception as e:
+        return f"An Error Occurred: {e}"
 
 def answer_questions(pipeline, question, paragraph):
     """
