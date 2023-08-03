@@ -72,7 +72,15 @@ if __name__ == '__main__':
     st.write("Explore Topics, Ask Questions, and Receive Informative Answers!")
 
     # Language Selection
-    language = st.selectbox("Select Language", ["English", "Spanish"])
+    languages = {
+        "English": "en",
+        "Spanish": "es",
+        "French": "fr",
+        "German": "de",
+        "Italian": "it",
+        # Add more languages and their codes here
+    }
+    language = st.selectbox("Select Language", list(languages.keys()))
 
     # Topic Input
     topic = st.text_input("Search Topic:", "")
@@ -85,9 +93,7 @@ if __name__ == '__main__':
 
     if topic:
         # Map selected language to language code
-        language_code = "en"  # Default to English
-        if language == "Spanish":
-            language_code = "es"
+        language_code = languages[language]
 
         # Loads Wikipedia summary of topic in the selected language
         summary = load_wiki(topic, language=language_code)
