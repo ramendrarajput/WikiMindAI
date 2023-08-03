@@ -20,6 +20,9 @@ With WikiMindAI, users can explore a wide range of subjects, ask questions about
 - Speech Recognition: WikiMindAI now enables users to ask questions in their preferred language using voice input, and the app responds with answers and audio summaries in the selected language.
 
 - Search Suggestion: WikiMindAI implements a search suggestion feature that provides autocomplete suggestions as the user types their search query. This can help users find relevant topics quickly and easily.
+
+### Limitations
+- Limited Translations: WikiMindAI only provides answers in English. This is because the load_qa_pipeline function uses the distilbert-base-uncased-distilled-squad model, which is specifically trained for English question-answering.
 ### How to Use WikiMindAI
 1. Search Topic: Enter a search topic in the provided text input box labeled "Search Topic." Press the Enter key to submit the query.
 
