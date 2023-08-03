@@ -3,6 +3,10 @@ import streamlit as st
 from transformers import pipeline
 from tokenizers import Tokenizer
 from languages import languages
+from gtts import gTTS
+from pydub import AudioSegment
+from io import BytesIO
+
 # Page configuration
 st.set_page_config(
     page_title="WikiMindAI",
@@ -38,7 +42,7 @@ def load_wiki(query, language="en"):
     wiki_wiki = wikipediaapi.Wikipedia(language, headers=headers)
     try:
         page = wiki_wiki.page(query)
-        summary = page.summary[:1000]  # Limit summary to 1000 characters
+        summary = page.summary
         return summary
     # Disambiguation Error Exception
     except wikipediaapi.exceptions.DisambiguationError:
@@ -77,6 +81,9 @@ if __name__ == '__main__':
     # Language Selection
     language = st.selectbox("Select Language", list(languages.keys()))
 
+    # Language Voice Support Checkbox
+    use_voice = st.checkbox("Enable Language Voice Support")
+
     # Topic Input
     topic = st.text_input("Search Topic:", "")
 
@@ -107,6 +114,21 @@ if __name__ == '__main__':
 
             # Displaying answer in real-time
             st.write(answer)
+
+            # Language Voice Support
+            if use_voice and summary:
+                # Converts the summary to speech using gTTS
+                tts = gTTS(summary, lang=language_code)
+                # Saves the speech as an audio file (you can also use BytesIO if you don't want to save a file)
+                mp3_data = BytesIO()
+                tts.write_to_fp(mp3_data)
+                mp3_data.seek(0)
+
+                # Uses pydub to load the audio file and convert it to a compatible format
+                audio = AudioSegment.from_file(mp3_data, format="mp3")
+
+                # Plays the audio
+                st.audio(audio.raw_data, format="audio/mp3")
 
 # Footer with link
 link = 'Created by [Gideon Ogunbanjo](https://gideonogunbanjo.netlify.app)'
