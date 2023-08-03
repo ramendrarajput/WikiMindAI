@@ -7,6 +7,7 @@ from gtts import gTTS
 from pydub import AudioSegment
 from io import BytesIO
 import speech_recognition as sr
+import requests
 
 # Page configuration
 st.set_page_config(
@@ -116,6 +117,28 @@ def recognize_speech(language_code):
         st.write(f"Error with the service; {e}")
     return ""
 
+def get_search_suggestions(query, language):
+    """
+    Fetches search suggestions from Wikipedia based on the query.
+
+    Args:
+        query (str): The search query.
+        language (str): The language code for the search.
+
+    Returns:
+        list: A list of search suggestions.
+    """
+    url = f"https://{language}.wikipedia.org/w/api.php"
+    params = {
+        "action": "opensearch",
+        "format": "json",
+        "search": query,
+        "limit": 5,
+    }
+    response = requests.get(url, params=params)
+    data = response.json()
+    return data[1]
+
 # Main application engine
 if __name__ == '__main__':
     # Display name and title
@@ -130,6 +153,12 @@ if __name__ == '__main__':
 
     # Topic Input
     topic = st.text_input("Search Topic:", "")
+
+    # Search Suggestions
+    if topic:
+        suggestions = get_search_suggestions(topic, languages[language])
+        st.write("Search Suggestions:")
+        st.write(suggestions)
 
     # Article Paragraph
     article_paragraph = st.empty()
