@@ -6,6 +6,7 @@ from languages import languages
 from gtts import gTTS
 from pydub import AudioSegment
 from io import BytesIO
+import speech_recognition as sr
 
 # Page configuration
 st.set_page_config(
@@ -72,6 +73,49 @@ def answer_questions(pipeline, question, paragraph):
     output = pipeline(input_data)
     return output
 
+def text_to_speech(text, language_code):
+    """
+    Converts text to speech in the specified language using gTTS.
+
+    Args:
+        text (str): The text to be converted to speech.
+        language_code (str): The language code for the speech synthesis.
+
+    Returns:
+        AudioSegment: The audio segment containing the speech.
+    """
+    tts = gTTS(text, lang=language_code)
+    mp3_data = BytesIO()
+    tts.write_to_fp(mp3_data)
+    mp3_data.seek(0)
+    audio = AudioSegment.from_file(mp3_data, format="mp3")
+    return audio
+
+def recognize_speech(language_code):
+    """
+    Captures audio from the microphone and converts it into text using SpeechRecognition.
+
+    Args:
+        language_code (str): The language code for the speech recognition.
+
+    Returns:
+        str: The recognized text.
+    """
+    recognizer = sr.Recognizer()
+    with sr.Microphone() as source:
+        st.write("Listening...")
+        audio = recognizer.listen(source)
+
+    try:
+        st.write("Recognizing...")
+        text = recognizer.recognize_google(audio, language=language_code)
+        return text
+    except sr.UnknownValueError:
+        st.write("Could not understand audio.")
+    except sr.RequestError as e:
+        st.write(f"Error with the service; {e}")
+    return ""
+
 # Main application engine
 if __name__ == '__main__':
     # Display name and title
@@ -92,6 +136,13 @@ if __name__ == '__main__':
 
     # Question Input
     question = st.text_input("Question:", "")
+
+    # Asks Question with Voice
+    if st.button("Ask Question with Voice"):
+        if use_voice:
+            recognized_text = recognize_speech(languages[language])
+            st.write(f"Recognized Question: {recognized_text}")
+            question = recognized_text
 
     if topic:
         # Map selected language to language code
@@ -117,17 +168,7 @@ if __name__ == '__main__':
 
             # Language Voice Support
             if use_voice and summary:
-                # Converts the summary to speech using gTTS
-                tts = gTTS(summary, lang=language_code)
-                # Saves the speech as an audio file (you can also use BytesIO if you don't want to save a file)
-                mp3_data = BytesIO()
-                tts.write_to_fp(mp3_data)
-                mp3_data.seek(0)
-
-                # Uses pydub to load the audio file and convert it to a compatible format
-                audio = AudioSegment.from_file(mp3_data, format="mp3")
-
-                # Plays the audio
+                audio = text_to_speech(summary, language_code)
                 st.audio(audio.raw_data, format="audio/mp3")
 
 # Footer with link
