@@ -1,8 +1,7 @@
-import wikipedia as wk
+import wikipediaapi
 import streamlit as st
 from transformers import pipeline
 from tokenizers import Tokenizer
-
 
 # Page configuration
 st.set_page_config(
@@ -22,28 +21,28 @@ def load_qa_pipeline():
     qa_pipeline = pipeline("question-answering", model="distilbert-base-uncased-distilled-squad")
     return qa_pipeline
 
-@st.cache
-def load_wiki(query):
+def load_wiki(query, language="en"):
     """
-    Searches Wikipedia for the given query and return a summary of the first search result.
+    Searches Wikipedia for the given query in the specified language and returns a summary of the first search result.
 
     Args:
         query (str): The search query for Wikipedia.
+        language (str): The language code for the Wikipedia search (default is "en" for English).
 
     Returns:
         str: The summary of the first Wikipedia search result.
     """
+    wiki_wiki = wikipediaapi.Wikipedia(language)
     try:
-        results = wk.search(query)
-        summary = wk.summary(results[0], sentences=10)
+        page = wiki_wiki.page(query)
+        summary = page.summary[:500]  # Limit summary to 500 characters
         return summary
     # Disambiguation Error Exception
-    except wk.exceptions.DisambiguationError:
+    except wikipediaapi.exceptions.DisambiguationError:
         return "Multiple articles found. Please provide a more specific topic."
-    #Internet Error Exception
-    except wk.exceptions.HTTPTimeoutError:
-        return "No internet connection. Please check your internet settings"
-    # General Catch-all Exception
+    # Internet Connection Error 
+    except wikipediaapi.exceptions.HTTPTimeoutError:
+        return "No internet connection. Please check your internet settings."
     except Exception as e:
         return f"An Error Occurred: {e}"
 
@@ -66,12 +65,14 @@ def answer_questions(pipeline, question, paragraph):
     output = pipeline(input_data)
     return output
 
-
 # Main application engine
 if __name__ == '__main__':
     # Display name and title
     st.title("WikiMindAI - Wikipedia-based Mindful Artificial Intelligence")
     st.write("Explore Topics, Ask Questions, and Receive Informative Answers!")
+
+    # Language Selection
+    language = st.selectbox("Select Language", ["English", "Spanish"])
 
     # Topic Input
     topic = st.text_input("Search Topic:", "")
@@ -83,8 +84,13 @@ if __name__ == '__main__':
     question = st.text_input("Question:", "")
 
     if topic:
-        # Loads Wikipedia summary of topic
-        summary = load_wiki(topic)
+        # Map selected language to language code
+        language_code = "en"  # Default to English
+        if language == "Spanish":
+            language_code = "es"
+
+        # Loads Wikipedia summary of topic in the selected language
+        summary = load_wiki(topic, language=language_code)
 
         # Displays article summary in paragraph
         article_paragraph.markdown(summary)
