@@ -37,10 +37,13 @@ def load_wiki(query):
         results = wk.search(query)
         summary = wk.summary(results[0], sentences=10)
         return summary
+    # Disambiguation Error Exception
     except wk.exceptions.DisambiguationError:
         return "Multiple articles found. Please provide a more specific topic."
+    #Internet Error Exception
     except wk.exceptions.HTTPTimeoutError:
         return "No internet connection. Please check your internet settings"
+    # General Catch-all Exception
     except Exception as e:
         return f"An Error Occurred: {e}"
 
