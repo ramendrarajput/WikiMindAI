@@ -1,13 +1,15 @@
 import wikipedia as wk
 import streamlit as st
 from transformers import pipeline
+from tokenizers import Tokenizer
 
 
 # Page configuration
 st.set_page_config(
     page_title="WikiMindAI"
 )
-    
+
+@st.cache(hash_funcs={Tokenizer: lambda _: None}, allow_output_mutation=True)   
 def load_qa_pipeline():
     """
     Loads the Question-Answering pipeline using the DistilBERT model.
@@ -18,7 +20,7 @@ def load_qa_pipeline():
     qa_pipeline = pipeline("question-answering", model="distilbert-base-uncased-distilled-squad")
     return qa_pipeline
 
-
+@st.cache
 def load_wiki(query):
     """
     Searches Wikipedia for the given query and return a summary of the first search result.
