@@ -6,7 +6,9 @@ from tokenizers import Tokenizer
 
 # Page configuration
 st.set_page_config(
-    page_title="WikiMindAI"
+    page_title="WikiMindAI",
+    layout="centered",
+    initial_sidebar_state="collapsed"
 )
 
 @st.cache(hash_funcs={Tokenizer: lambda _: None}, allow_output_mutation=True)   
@@ -31,10 +33,12 @@ def load_wiki(query):
     Returns:
         str: The summary of the first Wikipedia search result.
     """
-    results = wk.search(query)
-    summary = wk.summary(results[0], sentences=10)
-    return summary
-
+    try:
+        results = wk.search(query)
+        summary = wk.summary(results[0], sentences=10)
+        return summary
+    except wk.exceptions.DisambiguationError:
+        return "Multiple articles found. Please provide a more specific topic."
 
 def answer_questions(pipeline, question, paragraph):
     """
@@ -63,13 +67,13 @@ if __name__ == '__main__':
     st.write("Explore Topics, Ask Questions, and Receive Informative Answers!")
 
     # Topic Input
-    topic = st.text_input("Search Topic", "")
+    topic = st.text_input("Search Topic:", "")
 
     # Article Paragraph
     article_paragraph = st.empty()
 
     # Question Input
-    question = st.text_input("Question", "")
+    question = st.text_input("Question:", "")
 
     if topic:
         # Loads Wikipedia summary of topic
@@ -87,7 +91,9 @@ if __name__ == '__main__':
             result = answer_questions(qa_pipeline, question, summary)
             answer = result["answer"]
 
-            # Displaying answer
+            # Displaying answer in real-time
             st.write(answer)
-link='Created by [Gideon Ogunbanjo](https://gideonogunbanjo.netlify.app)'
-st.markdown(link,unsafe_allow_html=True)
+
+# Footer with link
+link = 'Created by [Gideon Ogunbanjo](https://gideonogunbanjo.netlify.app)'
+st.markdown(link, unsafe_allow_html=True)
