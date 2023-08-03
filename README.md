@@ -13,6 +13,7 @@ With WikiMindAI, users can explore a wide range of subjects, ask questions about
 
 - Efficient Caching: WikiMindAI implements caching to enhance performance and improve user experience. Frequently accessed data, such as the Question-Answering pipeline, is cached to reduce computation time and optimize response speed.
 
+- Multiple Language Selections: Users can select specific languages and WikiMindAI will provide personalised answers of the topic and question in their desired language.
 ### How to Use WikiMindAI
 1. Search Topic: Enter a search topic in the provided text input box labeled "Search Topic." Press the Enter key to submit the query.
 
