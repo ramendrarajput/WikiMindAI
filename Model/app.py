@@ -2,7 +2,7 @@ import wikipediaapi
 import streamlit as st
 from transformers import pipeline
 from tokenizers import Tokenizer
-
+from languages import languages
 # Page configuration
 st.set_page_config(
     page_title="WikiMindAI",
@@ -75,14 +75,6 @@ if __name__ == '__main__':
     st.write("Explore Topics, Ask Questions, and Receive Informative Answers!")
 
     # Language Selection
-    languages = {
-        "English": "en",
-        "Spanish": "es",
-        "French": "fr",
-        "German": "de",
-        "Italian": "it",
-        # Add more languages and their codes here
-    }
     language = st.selectbox("Select Language", list(languages.keys()))
 
     # Topic Input
