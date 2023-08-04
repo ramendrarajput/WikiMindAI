@@ -32,6 +32,7 @@ With WikiMindAI, users can explore a wide range of subjects, ask questions about
 
 4. Observe Results: The AI will process your question and display the relevant answer based on the information from Wikipedia. The answer will be shown directly below the question input.
 
+> Note that this Model is still under development and might not perform effectively. I'm trying to bring it up to speed as soon as possible
 ### Creator
 Gideon Ogunbanjo
 > [Credits](https://www.youtube.com/@eniolaa)
