@@ -6,3 +6,4 @@ streamlit==1.23.1
 tokenizers==0.13.3
 transformers==4.31.0
 Wikipedia_API==0.6.0
+PyAudio
