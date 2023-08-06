@@ -51,7 +51,7 @@ def load_wiki(query, language="en"):
         return "Multiple articles found. Please provide a more specific topic."
     # Internet Connection Error 
     except wikipediaapi.exceptions.HTTPTimeoutError:
-        return "No internet connection. Please check your internet settings."
+        return "No internet connection. Please check your internet connection settings."
     except Exception as e:
         return f"An Error Occurred: {e}"
 
