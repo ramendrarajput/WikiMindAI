@@ -149,7 +149,7 @@ if __name__ == '__main__':
     language = st.selectbox("Select Language", list(languages.keys()))
 
     # Language Voice Support Checkbox
-    use_voice = st.checkbox("Enable Language Voice Support")
+    # use_voice = st.checkbox("Enable Language Voice Support")
 
     # Topic Input
     topic = st.text_input("Search Topic:", "")
@@ -166,12 +166,12 @@ if __name__ == '__main__':
     # Question Input
     question = st.text_input("Question:", "")
 
-    # Asks Question with Voice
-    if st.button("Ask Question with Voice"):
-        if use_voice:
-            recognized_text = recognize_speech(languages[language])
-            st.write(f"Recognized Question: {recognized_text}")
-            question = recognized_text
+    # # Asks Question with Voice
+    # if st.button("Ask Question with Voice"):
+    #     if use_voice:
+    #         recognized_text = recognize_speech(languages[language])
+    #         st.write(f"Recognized Question: {recognized_text}")
+    #         question = recognized_text
 
     if topic:
         # Map selected language to language code
@@ -195,10 +195,10 @@ if __name__ == '__main__':
             # Displaying answer in real-time
             st.write(answer)
 
-            # Language Voice Support
-            if use_voice and summary:
-                audio = text_to_speech(summary, language_code)
-                st.audio(audio.raw_data, format="audio/mp3")
+            # # Language Voice Support
+            # if use_voice and summary:
+            #     audio = text_to_speech(summary, language_code)
+            #     st.audio(audio.raw_data, format="audio/mp3")
 
 # Footer with link
 link = 'Created by [Gideon Ogunbanjo](https://gideonogunbanjo.netlify.app)'
