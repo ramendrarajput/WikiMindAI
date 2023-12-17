@@ -148,6 +148,9 @@ if __name__ == '__main__':
 
     # Topic Input
     topic = st.text_input("Search Topic:", "")
+    if not topic:
+        st.write("Enter a specific topic or question to explore.")
+
 
     # Search Suggestions
     if topic:
