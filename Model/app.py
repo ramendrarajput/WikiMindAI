@@ -2,7 +2,6 @@ import wikipediaapi
 import streamlit as st
 from transformers import pipeline
 from tokenizers import Tokenizer
-from languages import languages
 from gtts import gTTS
 from pydub import AudioSegment
 from io import BytesIO
@@ -143,18 +142,14 @@ if __name__ == '__main__':
     st.title("WikiMindAI - Wikipedia-based Mindful Artificial Intelligence")
     st.write("Explore Topics, Ask Questions, and Receive Informative Answers!")
 
-    # Language Selection
-    language = st.selectbox("Select Language", list(languages.keys()))
-
     # Topic Input
     topic = st.text_input("Search Topic:", "")
     if not topic:
-        st.write("Enter a specific topic or question to explore.")
-
+        st.info("Enter a specific topic or question to explore.", icon="ℹ️")
 
     # Search Suggestions
     if topic:
-        suggestions = get_search_suggestions(topic, languages[language])
+        suggestions = get_search_suggestions(topic, "en")  # Default language code, "en"
         st.write("Search Suggestions:")
         if suggestions:
             st.write("Click on a suggestion to learn more.")
@@ -167,14 +162,11 @@ if __name__ == '__main__':
     # Question Input
     question = st.text_input("Question:", "")
     if not question:
-        st.write("Ask a question about the topic to receive informative answers.")
+        st.info("Ask a question about the topic to receive informative answers.", icon="ℹ️")
 
     if topic:
-        # Map selected language to language code
-        language_code = languages[language]
-
-        # Loads Wikipedia summary of topic in the selected language
-        summary = load_wiki(topic, language=language_code)
+        # Loads Wikipedia summary of topic
+        summary = load_wiki(topic, language="en")  # Default language code, "en"
 
         # Displays article summary in paragraph
         article_paragraph.markdown(summary)
