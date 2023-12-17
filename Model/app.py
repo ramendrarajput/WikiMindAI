@@ -1,7 +1,6 @@
 import wikipediaapi
 import streamlit as st
 from transformers import pipeline
-from tokenizers import Tokenizer
 from gtts import gTTS
 from pydub import AudioSegment
 from io import BytesIO
@@ -15,7 +14,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-@st.cache(hash_funcs={Tokenizer: lambda _: None}, allow_output_mutation=True)   
+@st.cache(allow_output_mutation=True)
 def load_qa_pipeline():
     """
     Loads the Question-Answering pipeline using the DistilBERT model.
@@ -152,6 +151,7 @@ if __name__ == '__main__':
         suggestions = get_search_suggestions(topic, "en")  # Default language code, "en"
         st.write("Search Suggestions:")
         if suggestions:
+            selected_suggestion = st.selectbox("Select a suggestion", suggestions)
             st.write("Click on a suggestion to learn more.")
         else:
             st.write("No suggestions found. Try refining your search.")
