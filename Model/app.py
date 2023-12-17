@@ -7,8 +7,6 @@ from pydub import AudioSegment
 from io import BytesIO
 import speech_recognition as sr
 import requests
-import torch
-import tensorflow as tf
 
 # Page configuration
 st.set_page_config(
