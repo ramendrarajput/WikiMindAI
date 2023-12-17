@@ -114,7 +114,6 @@ def recognize_speech(language_code):
         st.write("Could not understand audio.")
     except sr.RequestError as e:
         st.write(f"Error with the service; {e}")
-    return ""
 
 def get_search_suggestions(query, language):
     """
