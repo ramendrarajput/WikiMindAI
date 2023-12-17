@@ -49,7 +49,6 @@ def load_wiki(query, language="en"):
     # Disambiguation Error Exception
     except wikipediaapi.exceptions.DisambiguationError:
         return "Multiple articles found. Please provide a more specific topic."
-    # Internet Connection Error 
     except wikipediaapi.exceptions.HTTPTimeoutError:
         return "No internet connection. Please check your internet connection settings."
     except Exception as e:
