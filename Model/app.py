@@ -161,7 +161,6 @@ if __name__ == '__main__':
         else:
             st.write("No suggestions found. Try refining your search.")
 
-
     # Article Paragraph
     article_paragraph = st.empty()
 
@@ -177,6 +176,7 @@ if __name__ == '__main__':
 
         # Displays article summary in paragraph
         article_paragraph.markdown(summary)
+        st.write("Scroll down for more details or ask a specific question about the topic.")
 
         # -- Questions--
         if question:
