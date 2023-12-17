@@ -156,7 +156,11 @@ if __name__ == '__main__':
     if topic:
         suggestions = get_search_suggestions(topic, languages[language])
         st.write("Search Suggestions:")
-        st.write(suggestions)
+        if suggestions:
+            st.write("Click on a suggestion to learn more.")
+        else:
+            st.write("No suggestions found. Try refining your search.")
+
 
     # Article Paragraph
     article_paragraph = st.empty()
