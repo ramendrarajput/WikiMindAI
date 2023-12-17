@@ -13,12 +13,6 @@ With WikiMindAI, users can explore a wide range of subjects, ask questions about
 
 - Efficient Caching: WikiMindAI implements caching to enhance performance and improve user experience. Frequently accessed data, such as the Question-Answering pipeline, is cached to reduce computation time and optimize response speed.
 
-- Multiple Language Selections: Users can select various languages and WikiMindAI will provide personalised answers of the topic and question in their desired selected language.
-
-- Language Voice Support: WikiMindAI uses andvanced text-to-speech functionality to read out the article summary or answers to the user's questions. This feature can be toggled on and off.
-
-- Speech Recognition: WikiMindAI now enables users to ask questions in their preferred language using voice input, and the app responds with answers and audio summaries in the selected language.
-
 - Search Suggestion: WikiMindAI implements a search suggestion feature that provides autocomplete suggestions as the user types their search query. This can help users find relevant topics quickly and easily.
 
 ### Limitations
