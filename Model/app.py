@@ -166,6 +166,8 @@ if __name__ == '__main__':
 
     # Question Input
     question = st.text_input("Question:", "")
+    if not question:
+        st.write("Ask a question about the topic to receive informative answers.")
 
     if topic:
         # Map selected language to language code
