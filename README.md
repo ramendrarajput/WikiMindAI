@@ -17,6 +17,7 @@ With WikiMindAI, users can explore a wide range of subjects, ask questions about
 
 ### Limitations
 - Limited Translations: WikiMindAI only provides answers in English. This is because the load_qa_pipeline function uses the distilbert-base-uncased-distilled-squad model, which is specifically trained for English question-answering.
+- Disfunctional Question Feature: For now, WikiMindAi's question feature isn't functional. I hope to get this working as soon as i can.
 ### How to Use WikiMindAI
 1. Search Topic: Enter a search topic in the provided text input box labeled "Search Topic." Press the Enter key to submit the query.
 
