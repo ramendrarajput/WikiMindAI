@@ -148,7 +148,8 @@ if __name__ == '__main__':
 
     # Search Suggestions
     if topic:
-        suggestions = get_search_suggestions(topic, "en")  # Default language code, "en"
+        with st.spinner("Fetching search suggestions..."):
+            suggestions = get_search_suggestions(topic, "en")  # Default language code, "en"
         st.write("Search Suggestions:")
         if suggestions:
             selected_suggestion = st.selectbox("Select a suggestion", suggestions)
@@ -165,8 +166,9 @@ if __name__ == '__main__':
         st.info("Ask a question about the topic to receive informative answers.", icon="ℹ️")
 
     if topic:
-        # Loads Wikipedia summary of topic
-        summary = load_wiki(topic, language="en")  # Default language code, "en"
+        # Loads Wikipedia summary of the topic
+        with st.spinner("Fetching Wikipedia summary..."):
+            summary = load_wiki(topic, language="en")  # Default language code, "en"
 
         # Displays article summary in paragraph
         article_paragraph.markdown(summary)
@@ -175,7 +177,8 @@ if __name__ == '__main__':
         # -- Questions--
         if question:
             # Loads the question answering pipeline
-            qa_pipeline = load_qa_pipeline()
+            with st.spinner("Answering your question..."):
+                qa_pipeline = load_qa_pipeline()
 
             # Answers query question using article summary
             result = answer_questions(qa_pipeline, question, summary)
@@ -183,6 +186,7 @@ if __name__ == '__main__':
 
             # Displaying answer in real-time
             st.write(answer)
+
 # Footer with link
 link = 'Created by [Gideon Ogunbanjo](https://gideonogunbanjo.netlify.app)'
 st.markdown(link, unsafe_allow_html=True)
